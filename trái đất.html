@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Video Trực Tuyến</title>
+    <link rel="stylesheet" href="styles.css">
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #141414;
+        color: white;
+    }
+    
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #e50914;
+    }
+    
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    nav ul li {
+        display: inline;
+        margin-left: 20px;
+    }
+    
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+    
+    .banner {
+        height: 300px;
+        background-image: url('banner.jpg');
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .banner h1 {
+        font-size: 48px;
+    }
+    
+    .banner p {
+        font-size: 20px;
+    }
+    
+    .banner button {
+        padding: 10px 20px;
+        background-color: #e50914;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .movie-list {
+        padding: 20px;
+    }
+    
+    .movie-list h2 {
+        margin-bottom: 20px;
+    }
+    
+    .movies {
+        display: flex;
+        overflow-x: auto;
+    }
+    
+    .movie {
+        margin-right: 10px;
+    }
+    
+    .movie img {
+        width: 200px;
+        height: auto;
+        border-radius: 5px;
+    }
+    
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #222;
+    }
+    
+</head>
+<body>
+    <header>
+        <h1>Xem Video Trực Tuyến</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Trang Chủ</a></li>
+                <li><a href="#">Phim</a></li>
+                <li><a href="#">Series</a></li>
+                <li><a href="#">Tài Khoản</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="video-player">
+            <video id="video" controls>
+                <source src="your-video-file.mp4" type="video/mp4">
+                Trình duyệt của bạn không hỗ trợ video.
+            </video>
+        </section>
+
+        <section class="video-list">
+            <h2>Video Đề Xuất</h2>
+            <div class="videos">
+                <div class="video-item" data-video="video1.mp4">
+                    <img src="thumbnail1.jpg" alt="Video 1">
+                    <p>Video 1</p>
+                </div>
+                <div class="video-item" data-video="video2.mp4">
+                    <img src="thumbnail2.jpg" alt="Video 2">
+                    <p>Video 2</p>
+                </div>
+                <div class="video-item" data-video="video3.mp4">
+                    <img src="thumbnail3.jpg" alt="Video 3">
+                    <p>Video 3</p>
+                </div>
+                <!-- Thêm nhiều video ở đây -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Xem Video Trực Tuyến. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <script src="script.js">// Thêm chức năng JavaScript nếu cần
+        document.querySelector('.banner button').addEventListener('click', function() {
+            alert('Chức năng này chưa được triển khai!');
+        });
+        </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phong Tục Thờ Cúng Việt Nam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 2s;
+            position: relative;
+        }
+        .character {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+        .character.asker {
+            background-color: #FF6F61;
+            left: -120px;
+            top: 20px;
+            transition: transform 0.3s ease;
+        }
+        .character.answerer {
+            background-color: #6C63FF;
+            right: -120px;
+            bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .answer {
+            display: none;
+            font-size: 1em;
+            margin-top: 10px;
+            text-align: left;
+            color: #555;
+        }
+        .btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="character asker" id="asker">Hỏi</div>
+        <div class="character answerer" id="answerer">Đáp</div>
+
+        <div class="question" id="question">Nguồn gốc và biểu hiện của phong tục thờ cúng tổ tiên</div>
+        <div class="answer" id="answer">
+            <p><em>Hỏi:</em> “Này, bạn có biết tại sao người Việt lại coi trọng phong tục thờ cúng tổ tiên không? Mình nghe nói tổ tiên vẫn thường ‘quay về’ để xem chúng ta sống ra sao đó!”</p>
+            <p><em>Đáp:</em> “Haha, đúng rồi! Thực ra, thờ cúng tổ tiên thể hiện lòng thành kính và tôn trọng của chúng ta với ông bà, tổ tiên. Họ không chỉ là những người đã qua đời mà còn là nguồn gốc và nền tảng văn hóa của chúng ta.”</p>
+            <p><em>Hỏi:</em> “Nghe hay ghê! Vậy người ta thường làm gì để thể hiện lòng thành kính vậy?”</p>
+            <p><em>Đáp:</em> “Người Việt thường lập bàn thờ gia tiên, dâng lễ vào các dịp như Tết hay giỗ. Họ thường chuẩn bị hoa quả, đồ ăn và thắp hương. Nghe nói, nếu không dâng hương, có thể tổ tiên sẽ ‘thất vọng’ đấy!”</p>
+            <p><em>Hỏi:</em> “Haha, nếu tổ tiên thất vọng thì sao nhỉ? Chắc chắn tôi sẽ bị ‘trừng phạt’ bằng cách ăn món rau xào mà thôi!”</p>
+            <p><em>Đáp:</em> “Thì đúng là cái giá phải trả cho việc quên dâng hương rồi! Có một câu chuyện rất thú vị về Lạc Long Quân và Âu Cơ, họ sinh ra trăm trứng, nở ra trăm người con. Đó chính là nguồn gốc của người Việt mình!”</p>
+            <p><em>Hỏi:</em> “Wow, nghe hấp dẫn ghê! Thế có khi nào mình thử làm bánh chưng để cảm ơn tổ tiên không nhỉ?”</p>
+        </div>
+        <button class="btn" onclick="showNext()">Tiếp theo</button>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        const questions = [
+            {
+                question: "Nguồn gốc và biểu hiện của phong tục thờ cúng tổ tiên",
+                answer: `
+                    <p><em>Hỏi:</em> “Này, bạn có biết tại sao người Việt lại coi trọng phong tục thờ cúng tổ tiên không? Mình nghe nói tổ tiên vẫn thường ‘quay về’ để xem chúng ta sống ra sao đó!”</p>
+                    <p><em>Đáp:</em> “Haha, đúng rồi! Thực ra, thờ cúng tổ tiên thể hiện lòng thành kính và tôn trọng của chúng ta với ông bà, tổ tiên. Họ không chỉ là những người đã qua đời mà còn là nguồn gốc và nền tảng văn hóa của chúng ta.”</p>
+                    <p><em>Hỏi:</em> “Nghe hay ghê! Vậy người ta thường làm gì để thể hiện lòng thành kính vậy?”</p>
+                    <p><em>Đáp:</em> “Người Việt thường lập bàn thờ gia tiên, dâng lễ vào các dịp như Tết hay giỗ. Họ thường chuẩn bị hoa quả, đồ ăn và thắp hương. Nghe nói, nếu không dâng hương, có thể tổ tiên sẽ ‘thất vọng’ đấy!”</p>
+                    <p><em>Hỏi:</em> “Haha, nếu tổ tiên thất vọng thì sao nhỉ? Chắc chắn tôi sẽ bị ‘trừng phạt’ bằng cách ăn món rau xào mà thôi!”</p>
+                    <p><em>Đáp:</em> “Thì đúng là cái giá phải trả cho việc quên dâng hương rồi! Có một câu chuyện rất thú vị về Lạc Long Quân và Âu Cơ, họ sinh ra trăm trứng, nở ra trăm người con. Đó chính là nguồn gốc của người Việt mình!”</p>
+                    <p><em>Hỏi:</em> “Wow, nghe hấp dẫn ghê! Thế có khi nào mình thử làm bánh chưng để cảm ơn tổ tiên không nhỉ?”</p>
+                `
+            },
+            {
+                question: "Nguồn gốc và biểu hiện của phong tục thờ Quốc Tổ Hùng Vương",
+                answer: `
+                    <p><em>Hỏi:</em> “Mình còn nghe nói người Việt thờ Quốc Tổ Hùng Vương để nhớ nguồn cội, đúng không? Hay chỉ là một lễ hội bình thường?”</p>
+                    <p><em>Đáp:</em> “Haha, cái đó thì đúng! người Việt thờ Quốc Tổ Hùng Vương để nhớ nguồn cội của mình vì Hùng Vương là người khai sinh ra nước Văn Lang, là biểu tượng cho lòng yêu nước và tự hào dân tộc. Thờ Quốc Tổ không chỉ là một phong tục, mà còn là một phần trong văn hóa của chúng ta.”</p>
+                    <p><em>Hỏi:</em> “Vậy phong tục này được thể hiện ra sao trong đời sống? Chắc không phải ai cũng chạy đi dâng lễ mỗi ngày đâu nhỉ?”</p>
+                    <p><em>Đáp:</em> “Đúng vậy! Người dân thường tổ chức Giỗ Tổ Hùng Vương vào ngày 10 tháng 3 âm lịch, nơi mọi người đến dâng hương và tham gia các hoạt động văn hóa, thể thao. Còn trong đời sống hàng ngày, người dân thường thờ cúng các vị vua Hùng tại các đền thờ, trong đó có đền Hùng ở Phú Thọ.”</p>
+                    <p><em>Hỏi:</em> “Có vẻ như đây không chỉ là phong tục mà còn là một phần văn hóa! Nghe nói đền Hùng có cảnh đẹp lắm, có nên đi không nhỉ?”</p>
+                    <p><em>Đáp:</em> “Tuyệt vời! Đến đó không chỉ để thăm đền thờ mà còn để thưởng thức cảnh đẹp thiên nhiên và các món đặc sản vùng núi nữa. Đảm bảo sẽ không thất vọng đâu!”</p>
+                `
+            },
+            {
+                question: "Nguồn gốc và biểu hiện của phong tục thờ Mẫu",
+                answer: `
+                    <p><em>Hỏi:</em> “Vậy còn phong tục thờ Mẫu thì sao? Anh có biết không?”</p>
+                    <p><em>Đáp:</em> “Phong tục thờ Mẫu là tín ngưỡng thờ cúng các nữ thần trong văn hóa dân gian. Trong đó, Mẫu Liễu Hạnh, là biểu tượng của sự sinh sản, hạnh phúc và thịnh vượng. Tín ngưỡng này thể hiện sự tôn kính đối với nữ thần và vai trò của phụ nữ trong gia đình và xã hội.”</p>
+                    <p><em>Hỏi:</em> “Nguồn gốc của phong tục này ra sao? Hay là chỉ có các bà mẹ luôn nhắc nhở?”</p>
+                    <p><em>Đáp:</em> “Phong tục này có từ lâu đời, bắt nguồn từ tín ngưỡng dân gian của người Việt, trong đó có các vị nữ thần được tôn thờ như Mẫu Thượng Ngàn, Mẫu Địa Phủ. Mẫu Liễu Hạnh là một trong những vị thần được thờ nhiều nhất, đại diện cho sự bảo vệ và che chở cho con người.”</p>
+                    <p><em>Hỏi:</em> “Nghe có vẻ thú vị! Có lễ hội nào nổi bật không?”</p>
+                    <p><em>Đáp:</em> “Có đấy! Lễ hội Đền Mẫu ở Phủ Dầy (Nam Định) là một trong những lễ hội lớn nhất, thu hút đông đảo du khách thập phương đến tham gia cầu may mắn, sức khỏe và bình an. Còn nếu không muốn đi xa, tôi có thể tổ chức một lễ hội nhỏ ngay tại nhà với món ăn mà mẹ làm!”</p>
+                    <p><em>Hỏi:</em> “Vậy chắc phải tham gia một lần cho biết! Chứ không tham gia thì biết gì mà kể cho con cháu?”</p>
+                `
+            }
+        ];
+
+        function showNext() {
+            const questionEl = document.getElementById("question");
+            const answerEl = document.getElementById("answer");
+            const askerEl = document.getElementById("asker");
+            const answererEl = document.getElementById("answerer");
+
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            questionEl.innerHTML = questions[currentQuestion].question;
+            answerEl.innerHTML = questions[currentQuestion].answer;
+            answerEl.style.display = "block";
+
+            // Hiệu ứng phóng to nhân vật
+            askerEl.style.transform = "scale(1)";
+            answererEl.style.transform = "scale(1.2)";
+
+            setTimeout(() => {
+                askerEl.style.transform = "scale(0.9)";
+                answererEl.style.transform = "scale(0.9)";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Wiki</title>
+  <link rel="stylesheet"body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  #search-bar {
+    width: 80%;
+    padding: 8px;
+    margin-top: 10px;
+  }
+  
+  #content {
+    padding: 20px;
+  }
+  href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Simple Wiki</h1>
+    <input type="text" id="search-bar" placeholder="Tìm kiếm bài viết...">
+  </header>
+  <main id="content">
+    <div id="article"></div>
+  </main>
+  <script src="script.js">
+    document.getElementById('search-bar').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    const query = e.target.value;
+    fetch(`/api/article/${query}`)
+      .then(response => response.json())
+      .then(data => {
+        const articleDiv = document.getElementById('article');
+        articleDiv.innerHTML = `<h2>${data.title}</h2><p>${data.content}</p>`;
+      })
+      .catch(() => {
+        document.getElementById('article').innerHTML = '<p>Không tìm thấy bài viết</p>';
+      });
+  }
+});
+
+  </script>
+</body>
+</html>

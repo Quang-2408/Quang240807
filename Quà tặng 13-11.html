@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trái Tim Tình Yêu</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            perspective: 1000px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+            animation: rotate 6s infinite linear;
+        }
+
+        .heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite alternate;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 50px;
+            top: 0;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        @keyframes beat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .child {
+            position: absolute;
+            width: 80px;
+            height: auto;
+            animation-duration: 4s;
+            bottom: 20px;
+        }
+
+        .child.left {
+            left: 10%;
+            animation-name: run-left;
+        }
+
+        .child.right {
+            right: 10%;
+            animation-name: run-right;
+        }
+
+        @keyframes run-left {
+            0% { transform: translateX(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateX(40vw); }
+        }
+
+        @keyframes run-right {
+            0% { transform: translateX(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateX(-40vw); }
+        }
+
+        .child img {
+            width: 100%;
+            border-radius: 10%;
+            animation: jump 2s infinite alternate;
+        }
+
+        @keyframes jump {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            text-align: center;
+            color: white;
+            white-space: nowrap;
+            animation: move 8s linear infinite; /* Thay đổi thời gian chuyển động */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            max-width: 80%;
+            opacity: 0; /* Khởi tạo ở trạng thái ẩn */
+        }
+
+        @keyframes move {
+            0% { transform: translate(-50%, -50%) translateX(-100%); } /* Bắt đầu từ bên trái */
+            100% { transform: translate(-50%, -50%) translateX(100%); } /* Kết thúc bên phải */
+        }
+
+        .slow-move {
+            animation: slowMove 8s forwards; /* Thay đổi thời gian và kiểu chuyển động */
+        }
+
+        @keyframes slowMove {
+            0% {
+                transform: translate(-50%, -50%) translateX(-100%);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(-50%, -50%) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) translateX(100%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container">
+        <div class="heart"></div>
+    </div>
+    <div class="child left">
+        <img src="89b163e3-70b6-486d-8062-df836192e49c.jpg" alt="Nhân vật 1">
+    </div>
+    <div class="child right">
+        <img src="b40373e5-c2bd-4154-999b-ebd751470f5d.jpg" alt="Nhân vật 2">
+    </div>
+    <div class="message"></div>
+
+    <script>
+        const messages = [
+            "Tình yêu là hành trình không có điểm dừng.",
+            "Em là lý do anh luôn tươi cười và cố gắng mỗi ngày.",
+            "Mỗi khoảnh khắc bên em đều là những kỷ niệm quý giá trong kí ức của a.",
+            "Anh xin lỗi e vì không làm đc j nhiều trong tình yêu của đôi ta.",
+            "Nhưng a sẽ cố gắng để hoàn thiện bản thân mình hơn để xứng đáng với tình yêu của em.",
+            "Anh biết rằng em không thể xem được nội dung này.",
+            "Nhưng a vẫn muốn viết ra những dòng code này để gửi lời chúc đến người anh yêu vào ngày quan trọng này.",
+            "Đây là ngày mà hai ta đã bắt đầu tình yêu.",
+            "Tuy a không giỏi văn nên chỉ có thể nói với em từ nãy mà thôi.",
+            "Anh yêu em và a muốn mãi mãi yêu em."
+        ];
+
+        const messageDiv = document.querySelector('.message');
+        let currentIndex = 0;
+
+        // Hàm hiển thị lời nhắn
+        function showMessage() {
+            messageDiv.innerHTML = messages[currentIndex];
+            messageDiv.classList.remove('slow-move'); // Gỡ bỏ lớp chuyển động
+            void messageDiv.offsetWidth; // Để khởi động lại animation
+            messageDiv.classList.add('slow-move'); // Thêm lớp chuyển động
+
+            // Tăng chỉ số lên để chuyển sang lời nhắn tiếp theo
+            currentIndex = (currentIndex + 1) % messages.length;
+
+            // Đặt lại độ mờ sau một khoảng thời gian
+            setTimeout(() => {
+                messageDiv.style.opacity = 0; // Ẩn lời nhắn
+            }, 6400); // Thời gian hiển thị lời nhắn
+        }
+
+        // Thiết lập thời gian cho nhân vật chạy đến giữa
+        setTimeout(() => {
+            const leftChild = document.querySelector('.child.left');
+            const rightChild = document.querySelector('.child.right');
+            
+            leftChild.style.animationDuration = '2s';
+            leftChild.style.animationName = 'run-left-finish';
+            rightChild.style.animationDuration = '2s';
+            rightChild.style.animationName = 'run-right-finish';
+
+            // Khi cả hai nhân vật đã đến giữa
+            leftChild.style.transform = 'translateX(40vw)';
+            rightChild.style.transform = 'translateX(-40vw)';
+
+            // Hiển thị lời nhắn ngay sau khi chạy
+            showMessage(); // Hiển thị lời nhắn lần đầu
+            setInterval(showMessage, 8000); // Thay đổi lời nhắn mỗi 8 giây
+        }, 4000);
+
+        // Thêm keyframes để chạy đến giữa
+        document.styleSheets[0].insertRule(`
+            @keyframes run-left-finish {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(20vw); }
+            }
+        `);
+        document.styleSheets[0].insertRule(`
+            @keyframes run-right-finish {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-20vw); }
+            }
+        `);
+    </script>
+</body>
+</html>
